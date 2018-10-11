@@ -6,7 +6,7 @@ import { LOG_OUT, LOG_IN } from '../../constants.js';
 
 Actions.register(LOG_OUT, payload => {
   Axios(Router.request('POST', LOG_OUT))
-  .catch(error => {
-    Router.relocateTo(Router.route(LOG_IN));
+  .then(response =>  {
+    Router.relocateTo(response.request.responseURL);
   });
 });

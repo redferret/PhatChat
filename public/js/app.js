@@ -74095,8 +74095,6 @@ var _constants = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//const axios = require('axios');
-
 _AppActions2.default.register(_constants.LOG_IN, function (payload) {
   (0, _axios2.default)(_router2.default.request('POST', _constants.LOG_IN, {
     data: payload.values
@@ -74440,8 +74438,8 @@ var _constants = __webpack_require__(15);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _AppActions2.default.register(_constants.LOG_OUT, function (payload) {
-  (0, _axios2.default)(_router2.default.request('POST', _constants.LOG_OUT)).catch(function (error) {
-    _router2.default.relocateTo(_router2.default.route(_constants.LOG_IN));
+  (0, _axios2.default)(_router2.default.request('POST', _constants.LOG_OUT)).then(function (response) {
+    _router2.default.relocateTo(response.request.responseURL);
   });
 });
 
