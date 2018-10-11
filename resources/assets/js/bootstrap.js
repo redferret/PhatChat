@@ -1,4 +1,7 @@
 
+import Echo from "laravel-echo";
+import Pusher from 'pusher-js';
+
 window._ = require('lodash');
 window.Popper = require('popper.js').default;
 
@@ -45,3 +48,20 @@ if (token) {
  */
 require('./actions/ActionRepo.js');
 require('./routes.js');
+
+var pusher = new Pusher('3258a83179e757b040f9', {
+  cluster: 'mt1',
+  forceTLS: true
+});
+
+var channel = pusher.subscribe('chat');
+channel.bind('MessageSend', function(data) {
+  alert(data.message);
+});
+
+window.Echo = new Echo({
+  broadcaster: 'pusher',
+  key: '3258a83179e757b040f9',
+  cluster: 'mt1',
+  encrypted: true
+});
