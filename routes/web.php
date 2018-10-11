@@ -14,9 +14,6 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::get('/getExampleMessage/{id}', function($id) {
-  return array('message'=>'Success! Message '.$id.' received!');
-});
+Route::get('/', 'ChatsController@index');
+Route::get('messages', 'ChatsController@fetchMessages');
+Route::post('messages', 'ChatsController@sendMessage');
