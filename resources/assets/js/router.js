@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 let axiosDefaults = require('axios/lib/defaults');
 
-function getCSRF() {
+export function getCSRF() {
   try {
     return window.axios.defaults.headers.common['X-CSRF-TOKEN']
   } catch (error) {
@@ -51,20 +51,15 @@ class Router {
     window.location.href = url;
   }
 
-  request(type, routeName, data, routeArgs) {
-    if (typeof data == 'undefined' || data == null) {
-      data = {
-        _token: getCSRF()
-      }
-    } else {
-      data._token = getCSRF();
+  request(type, routeName, requestData) {
+    if (typeof requestData == 'undefined' || requestData == null) {
+      requestData = {};
     }
-
     return {
       method: type,
-      url: this.getRoute(routeName, routeArgs),
+      url: this.getRoute(routeName, requestData.args),
       headers: HEADERS,
-      data: data
+      data: requestData.data
     }
   }
 }

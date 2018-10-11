@@ -8,7 +8,9 @@ import { LOG_IN, ROOT_URL } from '../../constants.js';
 //const axios = require('axios');
 
 Actions.register(LOG_IN, payload => {
-  Axios(Router.request('POST', LOG_IN, payload.values))
+  Axios(Router.request('POST', LOG_IN, {
+    data: payload.values
+  }))
   .then(checkStatus)
   .then(response => {
     Router.relocateTo(response.request.responseURL);

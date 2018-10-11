@@ -36,13 +36,14 @@ describe('Route is set and returns the expected URL', () => {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': 'Not Defined'
-      },
-      data: {
-        _token: 'Not Defined'
       }
     };
 
-    let theRequest = Router.request('post', routeName, null, {id: testId});
+    let theRequest = Router.request('post', routeName, {
+      args: {
+        id: testId
+      }
+    });
     expect(theRequest).toEqual(theExpectedRequest);
   });
 

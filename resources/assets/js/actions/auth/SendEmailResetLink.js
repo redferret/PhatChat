@@ -6,7 +6,9 @@ import Router, { checkStatus } from '../../router.js';
 import { SEND_PASSWORD_RESET } from '../../constants.js';
 
 Actions.register(SEND_PASSWORD_RESET, payload => {
-  Axios(Router.request('POST', SEND_PASSWORD_RESET, payload.values))
+  Axios(Router.request('POST', SEND_PASSWORD_RESET, {
+    data: payload.values
+  }))
   .then(checkStatus)
   .then(response => {
     AuthStore.setMessage('If an account matching the given email is found you will receive an email shortly');

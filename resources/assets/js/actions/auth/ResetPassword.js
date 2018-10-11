@@ -6,7 +6,9 @@ import Router, { checkStatus } from '../../router.js';
 import { RESET_PASSWORD_REQUEST } from '../../constants.js';
 
 Actions.register(RESET_PASSWORD_REQUEST, payload => {
-  Axios(Router.request('POST', RESET_PASSWORD_REQUEST, payload.values))
+  Axios(Router.request('POST', RESET_PASSWORD_REQUEST, {
+    data: payload.values
+  }))
   .then(checkStatus)
   .then(response => {
     Router.relocateTo(response.request.responseURL);

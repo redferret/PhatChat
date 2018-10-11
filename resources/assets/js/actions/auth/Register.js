@@ -6,7 +6,9 @@ import Router, { checkStatus, parseJSON } from '../../router.js';
 import { REGISTER } from '../../constants.js';
 
 Actions.register(REGISTER, payload => {
-  Axios(Router.request('POST', REGISTER, payload.values))
+  Axios(Router.request('POST', REGISTER, {
+    data: payload.values
+  }))
   .then(checkStatus)
   .then(response => {
     Router.relocateTo(response.request.responseURL);
